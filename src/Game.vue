@@ -114,7 +114,7 @@ function completeRow() {
         grid = genResultGrid()
         showMessage(
           ['Genius', 'Magnificent', 'Impressive', 'Splendid', 'Great', 'Phew'][
-            currentRowIndex
+          currentRowIndex
           ],
           -1
         )
@@ -179,43 +179,41 @@ function genResultGrid() {
     </div>
   </Transition>
   <header>
-    <h1>VVORDLE</h1>
-    <a
-      id="source-link"
-      href="https://github.com/yyx990803/vue-wordle"
-      target="_blank"
-      >Source</a
-    >
+    <h1>Purrdle</h1>
   </header>
-  <div id="board">
-    <div
-      v-for="(row, index) in board"
-      :class="[
-        'row',
-        shakeRowIndex === index && 'shake',
-        success && currentRowIndex === index && 'jump'
-      ]"
-    >
+  <div class="container">
+    <div id="board">
       <div
-        v-for="(tile, index) in row"
-        :class="['tile', tile.letter && 'filled', tile.state && 'revealed']"
+        v-for="(row, index) in board"
+        :class="[
+          'row',
+          shakeRowIndex === index && 'shake',
+          success && currentRowIndex === index && 'jump'
+        ]"
       >
-        <div class="front" :style="{ transitionDelay: `${index * 300}ms` }">
-          {{ tile.letter }}
-        </div>
         <div
-          :class="['back', tile.state]"
-          :style="{
-            transitionDelay: `${index * 300}ms`,
-            animationDelay: `${index * 100}ms`
-          }"
+          v-for="(tile, index) in row"
+          :class="['tile', tile.letter && 'filled', tile.state && 'revealed']"
         >
-          {{ tile.letter }}
+          <div class="front" :style="{ transitionDelay: `${index * 300}ms` }">{{ tile.letter }}</div>
+          <div
+            :class="['back', tile.state]"
+            :style="{
+              transitionDelay: `${index * 300}ms`,
+              animationDelay: `${index * 100}ms`
+            }"
+          >{{ tile.letter }}</div>
         </div>
       </div>
     </div>
+    <Keyboard @key="onKey" :letter-states="letterStates" />
   </div>
-  <Keyboard @key="onKey" :letter-states="letterStates" />
+  <footer>
+    <div>
+      Made with ❤️ and 😻 by
+      <a href="https://www.smalls.com/" target="_blank" rel="noopener noreferrer">Smalls</a>
+    </div>
+  </footer>
 </template>
 
 <style scoped>
@@ -229,6 +227,7 @@ function genResultGrid() {
   height: var(--height);
   width: min(350px, calc(var(--height) / 6 * 5));
   margin: 0px auto;
+  text-shadow: 1px 1px 2px #000;
 }
 .message {
   position: absolute;
@@ -280,10 +279,10 @@ function genResultGrid() {
   -webkit-backface-visibility: hidden;
 }
 .tile .front {
-  border: 2px solid #d3d6da;
+  border: 2px solid #a49f97;
 }
 .tile.filled .front {
-  border-color: #999;
+  border-color: #f8a06a;
 }
 .tile .back {
   transform: rotateX(180deg);

@@ -227,7 +227,6 @@ function genResultGrid() {
   height: var(--height);
   width: min(350px, calc(var(--height) / 6 * 5));
   margin: 0px auto;
-  text-shadow: 1px 1px 2px #000;
 }
 .message {
   position: absolute;
